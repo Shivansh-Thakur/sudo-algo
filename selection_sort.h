@@ -4,20 +4,21 @@
 #include <vector>
 #include <utility>
 
-// TODO: implement both ascending and descending order
 template<typename T>
-void selection_sort(std::vector<T>& vec)
+void selection_sort(std::vector<T>& vec,
+		    bool cmp(T, T)=[](T a, T b){return a<b;})
 {
-  size_t min;
+  // selected index for sort
+  size_t sel;
   
   for(size_t i=0; i<vec.size(); i++) {
-    min = i;
+    sel = i;
 
-    // search for smallest element 
+    // search element with cmp
     for(size_t j = i+1; j<vec.size(); j++)
-      if (vec[j] < vec[min]) min = j;
+      if (cmp(vec[j], vec[sel])) sel = j;
 
-    // bring smallest to top
-    std::swap(vec[i], vec[min]);
+    // bring selected element to top
+    std::swap(vec[i], vec[sel]);
   }
 }
