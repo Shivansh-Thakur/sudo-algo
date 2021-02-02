@@ -14,7 +14,7 @@ void selection_sort(std::vector<T>& vec)
     min = i;
 
     // search for smallest element 
-    for(size_t j = j+1; j<vec.size(); j++)
+    for(size_t j = i+1; j<vec.size(); j++)
       if (vec[j] < vec[min]) min = j;
 
     // bring smallest to top
