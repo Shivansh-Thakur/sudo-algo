@@ -11,6 +11,10 @@ ostream& operator<<(ostream& os, const vector<T>& vec)
   return os;
 }
 
+bool is_less(int a, int b) { return a<b;}
+
+bool is_more(int a, int b) { return a>b;}
+
 void test1()
 {
   vector<int> v0{0, 22, 3, 2, 21};
@@ -34,9 +38,14 @@ void test1()
   selection_sort(v3);
   cout << "v3 = " << v3 << "\n";
 
+  // test 1's as input
+  vector<int> v4{1, 1, 1, 1, 1};
+  selection_sort(v4);
+  cout << "v4 = " << v4 << "\n";
+
   // test 0's as input
   vector<int> v5(10);
-  selection_sort(v5);
+  selection_sort(v5, is_more);
   cout << "v5 = " << v5 << "\n";
 
   // test 0's and 1's
@@ -45,7 +54,7 @@ void test1()
     if(i%2 == 0) v6.push_back(1);
     else v6.push_back(0);
   }
-  selection_sort(v6);
+  selection_sort(v6, is_more);
   cout << "v6 = " << v6 << "\n";
 
 }
