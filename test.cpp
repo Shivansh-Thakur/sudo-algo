@@ -8,15 +8,12 @@ using namespace std;
 template<typename T>
 ostream& operator<<(ostream& os, const vector<T>& vec)
 {
-  for(auto i:vec) cout << i << " ";
+  for(auto i:vec) os << i << " ";
   return os;
 }
 
-bool is_less(int a, int b) { return a<b;}
-
+// compare function, used for descending order sort
 bool is_more(int a, int b) { return a>b;}
-
-// TODO: use a function: func_name(sorting_type)
 
 // test selection sort
 void test1()
@@ -28,7 +25,7 @@ void test1()
   // test large input
   vector<int> v1;
   for(int i=1000; i>0; i--) v1.push_back(i);
-  // selection_sort(v1);
+  selection_sort(v1);
   // cout << "v1 = " << v1 << "\n";
 
   // test 0 as input
@@ -49,7 +46,7 @@ void test1()
 
   // test 0's as input
   vector<int> v5(10);
-  selection_sort(v5, is_more);
+  // selection_sort(v5);
   cout << "v5 = " << v5 << "\n";
 
   // test 0's and 1's
@@ -108,8 +105,8 @@ void test2()
 
 int main()
   try {
-    test2();
-    return 0;
+    test1();
+   return 0;
   }
   catch(exception& e) {
     cerr << "Error: " << e.what();
