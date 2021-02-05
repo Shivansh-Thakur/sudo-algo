@@ -1,6 +1,4 @@
-#include "selection_sort.h"
-#include "insertion_sort.h"
-#include "heap_sort.h"
+#include "sorting.h"
 #include <exception>
 
 using namespace std;
@@ -12,6 +10,9 @@ ostream& operator<<(ostream& os, const vector<T>& vec)
     for(auto i:vec) os << i << " ";
     return os;
 }
+
+// compare function, used for descending order sort
+bool is_less(int a, int b) { return a<b;}
 
 // compare function, used for descending order sort
 bool is_more(int a, int b) { return a>b;}
