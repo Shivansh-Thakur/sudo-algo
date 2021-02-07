@@ -103,28 +103,35 @@ void heap_sort(std::vector<T>& vec,
     }
 }
 
-template<typename T>
-T max_element(const std::vector<T> vec)
+// find maximum element in vec
+template<typename Iter>
+Iter max_element(Iter begin, Iter end)
 {
-    T max = vec[0];
-    
-    for(auto i:vec)
-	if (i > max) max = i;
+    if(begin == end) return end;
+
+    Iter max=begin;
+    while(begin != end) {
+	if(*max < *begin) max = begin;
+	begin++;
+    }
     return max;
 }
 
 
-template<typename T>
-T min_element(const std::vector<T> vec)
+// find maximum element in vec
+template<typename Iter>
+Iter min_element(Iter begin, Iter end)
 {
-    T min = vec[0];
-    
-    for(auto i:vec)
-	if (i < min) min = i;
+    if(begin == end) return end;
+
+    Iter min=begin;
+    while(begin != end) {
+	if(*min > *begin) min = begin;
+	begin++;
+    }
     return min;
 }
 
-// TODO: find a way to incorporate cmp
 template<typename T>
 void count_sort(std::vector<T>& vec)
 {
@@ -132,17 +139,17 @@ void count_sort(std::vector<T>& vec)
 
     // make a counter array of max-min+1 elements
     // to store count on every unique element
-    T max, min;
-    max = max_element(vec);
-    min = min_element(vec);
+    T max = *(max_element(vec.begin(), vec.end()));
+    T min = *(min_element(vec.begin(), vec.end()));
+
     long counter[max-min+1];
 
     // make counter 0
     for(auto i=0; i<max-min+1; i++) counter[i]=0;
 
-    // store element count 
+    // store element count
     for(auto i:vec) counter[i-min]++;
-	
+
     long j=0;
     for(long i=min; i<=max; i++) {
 	// if counter is positive add element to vec
