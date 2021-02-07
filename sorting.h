@@ -159,3 +159,21 @@ void count_sort(std::vector<T>& vec)
 	}
     }
 }
+
+template<typename T>
+void shell_sort(std::vector<T>& vec)
+{
+    T tmp;
+    long j=0;
+    for(size_t gap = vec.size()/2; gap > 0; gap /= 2) {
+	for(size_t i=gap; i<vec.size(); i++) {
+	    tmp = vec[i];
+	    j = i-gap;
+	    while(j>=0 && vec[j]>tmp) {
+		vec[j+gap] = vec[j];
+		j -= gap;
+	    }
+	    vec[j+gap] = tmp;
+	}
+    }
+}
