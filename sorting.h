@@ -3,7 +3,14 @@
 
 #include <iostream>
 #include <vector>
-#include <utility>
+
+template<typename T>
+void swap(T a, T b)
+{
+    a = a+b;
+    b = a-b;
+    a = a-b;
+}
 
 template <typename T>
 void bubble_sort(std :: vector<T> &v,
@@ -20,7 +27,7 @@ void bubble_sort(std :: vector<T> &v,
 	// move bubble to v.size()-i according to cmp
 	for(size_t j = 0; j < v.size()-i; j++){
 	    if(cmp(v[j+1], v[j])) {
-		std::swap(v[j], v[j+1]);
+		swap(v[j], v[j+1]);
 		swapped=true;
 	    }
 	}
@@ -139,8 +146,8 @@ void count_sort(std::vector<T>& vec)
 
     // make a counter array of max-min+1 elements
     // to store count on every unique element
-    T max = *(max_element(vec.begin(), vec.end()));
-    T min = *(min_element(vec.begin(), vec.end()));
+    T max = *max_element(vec.begin(), vec.end());
+    T min = *min_element(vec.begin(), vec.end());
 
     long counter[max-min+1];
 
