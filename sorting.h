@@ -78,6 +78,31 @@ void selection_sort(std::vector<T>& vec,
     }
 }
 
+template<typename T>
+void shell_sort(std :: vector<T> &vec,
+		 bool cmp(T, T)=[](T a, T b){return a < b;})
+{
+    T tmp;
+    long j=0;
+    
+    // divide vec into sub blocks with size of gap 
+    for(size_t gap = vec.size()/2; gap > 0; gap /= 2) {
+	// compare elements of sub blocks having gap 
+	// elements between them
+	for(size_t i=gap; i<vec.size(); i++) {
+	    tmp = vec[i];
+	    j = i-gap;
+
+	    while(j>=0 && cmp(tmp, vec[j])) {
+		vec[j+gap] = vec[j];
+		j -= gap;
+	    }
+
+	    vec[j+gap] = tmp;
+	}
+    }
+}
+
 // perform a heapify down operation for max or min heap
 // depending on cmp
 template<typename T>
@@ -142,7 +167,8 @@ Iter min_element(Iter begin, Iter end)
 template<typename T>
 void count_sort(std::vector<T>& vec)
 {
-    if(vec.size() == 0) return;
+    // do nothing if vec is empty
+    if(!vec.size()) return;
 
     // make a counter array of max-min+1 elements
     // to store count on every unique element
@@ -167,20 +193,3 @@ void count_sort(std::vector<T>& vec)
     }
 }
 
-template<typename T>
-void shell_sort(std::vector<T>& vec)
-{
-    T tmp;
-    long j=0;
-    for(size_t gap = vec.size()/2; gap > 0; gap /= 2) {
-	for(size_t i=gap; i<vec.size(); i++) {
-	    tmp = vec[i];
-	    j = i-gap;
-	    while(j>=0 && vec[j]>tmp) {
-		vec[j+gap] = vec[j];
-		j -= gap;
-	    }
-	    vec[j+gap] = tmp;
-	}
-    }
-}
